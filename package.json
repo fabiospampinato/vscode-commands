@@ -1,0 +1,79 @@
+{
+  "name": "vscode-commands",
+  "displayName": "Commands",
+  "description": "Trigger arbitrary commands from the statusbar. Supports passing arguments!",
+  "icon": "resources/logo-128x128.png",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "out/src/extension.js",
+  "publisher": "fabiospampinato",
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Commands - Configuration",
+      "properties": {
+        "commands.commands": {
+          "type": "array",
+          "description": "Commands to add to the statusbar",
+          "default": []
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "commands.editConfig",
+        "title": "Commands: Edit Configuration"
+      },
+      {
+        "command": "commands.refresh",
+        "title": "Commands: Refresh"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "publish": "vsce publish && npm publish",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "bugs": {
+    "url": "https://github.com/fabiospampinato/vscode-commands/issues"
+  },
+  "author": {
+    "name": "Fabio Spampinato",
+    "email": "spampinabio@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabiospampinato/vscode-commands.git"
+  },
+  "engines": {
+    "vscode": "^1.10.0"
+  },
+  "keywords": [
+    "vscode",
+    "vsc",
+    "extension",
+    "commands",
+    "statusbar"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "dependencies": {
+    "conf-merge": "^1.0.0",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "pify": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.40",
+    "tslint": "^4.4.2",
+    "typescript": "~2.2.0",
+    "vscode": "^1.1.4"
+  }
+}
