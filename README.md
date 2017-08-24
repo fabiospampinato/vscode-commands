@@ -57,233 +57,204 @@ The configuration is an object that looks like this, most options are optional:
 
 ## Examples
 
-Click on the description to see the configuration used to achieve that particular result.
-
 ### Simple commands
 
-<details>
-  <summary>Add buttons for opening the command palette, the global settings and toggling zen mode</summary>
+- Add buttons for opening the command palette, the global settings and toggling zen mode
 
-  ```js
-  {
-    "text": "$(chevron-right)",
-    "command": "workbench.action.showCommands",
-    "tooltip": "Show commands"
-  },
-  {
-    "text": "$(gear)",
-    "command": "workbench.action.openGlobalSettings",
-    "tooltip": "Settings"
-  },
-  {
-    "text": "Zen",
-    "command": "workbench.action.toggleZenMode",
-    "tooltip": "Toggle zen mode"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(chevron-right)",
+  "command": "workbench.action.showCommands",
+  "tooltip": "Show commands"
+},
+{
+  "text": "$(gear)",
+  "command": "workbench.action.openGlobalSettings",
+  "tooltip": "Settings"
+},
+{
+  "text": "Zen",
+  "command": "workbench.action.toggleZenMode",
+  "tooltip": "Toggle zen mode"
+}
+```
 
 ![Basic](resources/demo/basic.png)
 
-<details>
-  <summary>Add some file-related buttons: create a new untitled file and save all files</summary>
+- Add some file-related buttons: create a new untitled file and save all files
 
-  ```js
-  {
-    "text": "$(file-code) New file",
-    "command": "workbench.action.files.newUntitledFile",
-    "tooltip": "New file"
-  },
-  {
-    "text": "$(checklist) Save all",
-    "command": "workbench.action.files.saveAll",
-    "tooltip": "Save all files"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(file-code) New file",
+  "command": "workbench.action.files.newUntitledFile",
+  "tooltip": "New file"
+},
+{
+  "text": "$(checklist) Save all",
+  "command": "workbench.action.files.saveAll",
+  "tooltip": "Save all files"
+}
+```
 
 ![File-Related](resources/demo/file_related.png)
 
-<details>
-  <summary>Add a button for showing the Markdown preview to the side, only when a Markdown file is currently active</summary>
+- Add a button for showing the Markdown preview to the side, only when a Markdown file is currently active
 
-  ```js
-  {
-    "text": "$(markdown)",
-    "command": "markdown.showPreviewToSide",
-    "tooltip": "Open markdown preview",
-    "filterFileRegex": ".*\\.md"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(markdown)",
+  "command": "markdown.showPreviewToSide",
+  "tooltip": "Open markdown preview",
+  "filterFileRegex": ".*\\.md"
+}
+```
 
 ![Markdown](resources/demo/markdown.png)
 
 ### Implementing existing extensions' functionality
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=Tyriar.terminal-tabs">Terminal Tabs</a>: Add buttons for easy switching to the N-th terminal instance</summary>
+- [Terminal Tabs](https://marketplace.visualstudio.com/items?itemName=Tyriar.terminal-tabs): Add buttons for easy switching to the N-th terminal instance
 
-  ```js
-  {
-    "text": "$(terminal) 1",
-    "command": "workbench.action.terminal.focusAtIndex1",
-    "tooltip": "Focus to terminal #1"
-  },
-  {
-    "text": "$(terminal) 2",
-    "command": "workbench.action.terminal.focusAtIndex2",
-    "tooltip": "Focus to terminal #2"
-  },
-  {
-    "text": "$(terminal) 3",
-    "command": "workbench.action.terminal.focusAtIndex3",
-    "tooltip": "Focus to terminal #3"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(terminal) 1",
+  "command": "workbench.action.terminal.focusAtIndex1",
+  "tooltip": "Focus to terminal #1"
+},
+{
+  "text": "$(terminal) 2",
+  "command": "workbench.action.terminal.focusAtIndex2",
+  "tooltip": "Focus to terminal #2"
+},
+{
+  "text": "$(terminal) 3",
+  "command": "workbench.action.terminal.focusAtIndex3",
+  "tooltip": "Focus to terminal #3"
+}
+```
 
 ![Terminal Tabs](resources/demo/terminal_tabs.png)
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.activitusbar">Activitus Bar</a>: Replace the activity bar with buttons in the statusbar</summary>
+- [Activitus Bar](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.activitusbar): Replace the activity bar with buttons in the statusbar
 
-  ```js
-  {
-    "text": "$(file-directory)",
-    "command": "workbench.view.explorer",
-    "tooltip": "Explorer"
-  },
-  {
-    "text": "$(search)",
-    "command": "workbench.view.search",
-    "tooltip": "Search"
-  },
-  {
-    "text": "$(repo-forked)",
-    "command": "workbench.view.scm",
-    "tooltip": "Source Control"
-  },
-  {
-    "text": "$(bug)",
-    "command": "workbench.view.debug",
-    "tooltip": "Debug"
-  },
-  {
-    "text": "$(package)",
-    "command": "workbench.view.extensions",
-    "tooltip": "Extensions"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(file-directory)",
+  "command": "workbench.view.explorer",
+  "tooltip": "Explorer"
+},
+{
+  "text": "$(search)",
+  "command": "workbench.view.search",
+  "tooltip": "Search"
+},
+{
+  "text": "$(repo-forked)",
+  "command": "workbench.view.scm",
+  "tooltip": "Source Control"
+},
+{
+  "text": "$(bug)",
+  "command": "workbench.view.debug",
+  "tooltip": "Debug"
+},
+{
+  "text": "$(package)",
+  "command": "workbench.view.extensions",
+  "tooltip": "Extensions"
+}
+```
 
 ![Activitus Bar](resources/demo/activitus_bar.png)
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-statusbar-debugger">StatusBar Debugger</a>: Replace the floating debugger widget with some statusbar buttons. That extension is actually a bit more powerful than this, but if you don't need all it's functionalities the following configuration might be good enough.</summary>
+- [StatusBar Debugger](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-statusbar-debugger): Replace the floating debugger widget with some statusbar buttoextension is actually a bit more powerful than this, but if you don't need all it's functionalities the following configuration might be good enough.</summary>
 
-  ```js
-  {
-    "text": "$(triangle-right)",
-    "command": "workbench.action.debug.start",
-    "tooltip": "Start debugging"
-  },
-  {
-    "text": "$(primitive-square)",
-    "command": "workbench.action.debug.stop",
-    "tooltip": "Stop debugging"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(triangle-right)",
+  "command": "workbench.action.debug.start",
+  "tooltip": "Start debugging"
+},
+{
+  "text": "$(primitive-square)",
+  "command": "workbench.action.debug.stop",
+  "tooltip": "Stop debugging"
+}
+```
 
 ![StatusBar Debugger](resources/demo/statusbar_debugger.png)
 
 ### Plays well with others
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus">Projects+</a>: Add some buttons for quickly switch between projects</summary>
+[Projects+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus): Add some buttons for quickly switch between projects
 
-  ```js
-  {
-    "text": "$(file-submodule)",
-    "command": "projects.open",
-    "tooltip": "Open a project"
-  },
-  {
-    "text": "Projects+",
-    "command": "projects.openByName",
-    "arguments": ["vscode-projects-plus"],
-    "tooltip": "Open Projects+"
-  },
-  {
-    "text": "Todo+",
-    "command": "projects.openByName",
-    "arguments": ["vscode-todo-plus", true],
-    "tooltip": "Open Todo+ in a new window"
-  },
-  {
-    "text": "My Group",
-    "command": "projects.openByName",
-    "arguments": ["My Group", false, true],
-    "tooltip": "Switch to the My Group"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(file-submodule)",
+  "command": "projects.open",
+  "tooltip": "Open a project"
+},
+{
+  "text": "Projects+",
+  "command": "projects.openByName",
+  "arguments": ["vscode-projects-plus"],
+  "tooltip": "Open Projects+"
+},
+{
+  "text": "Todo+",
+  "command": "projects.openByName",
+  "arguments": ["vscode-todo-plus", true],
+  "tooltip": "Open Todo+ in a new window"
+},
+{
+  "text": "My Group",
+  "command": "projects.openByName",
+  "arguments": ["My Group", false, true],
+  "tooltip": "Switch to the My Group"
+}
+```
 
 ![Projects+](resources/demo/projects_plus.png)
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus">Todo+</a>: Add a button for opening the todo file, and if that is opened add a button for viewing all your todos across your projects, using <a href="https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus-todo-plus">Projects+ Todo+</a></summary>
+[Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus): Add a button for opening the todo file, and if that is opened add a button for viewintodos across your projects, using [Projects+ Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus-todo-plus)</summary>
 
-  ```js
-  {
-    "text": "$(check)",
-    "command": "todo.open",
-    "tooltip": "Open todo"
-  },
-  {
-    "text": "$(checklist)",
-    "command": "projects.todo",
-    "tooltip": "Open global todo",
-    "filterLanguageRegex": "todo"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(check)",
+  "command": "todo.open",
+  "tooltip": "Open todo"
+},
+{
+  "text": "$(checklist)",
+  "command": "projects.todo",
+  "tooltip": "Open global todo",
+  "filterLanguageRegex": "todo"
+}
+```
 
 ![Todo+](resources/demo/todo_plus.png)
 
-<details>
-  <summary><a href="https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals">Terminals</a>: Trigger custom advanced terminal commands</summary>
+[Terminals](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals): Trigger custom advanced terminal commands
 
-  ```js
-  {
-    "text": "$(terminal)",
-    "command": "terminals.runTerminal",
-    "tooltip": "Run a terminal"
-  },
-  {
-    "text": "Init",
-    "command": "terminals.runTerminalByName",
-    "arguments": ["init"],
-    "tooltip": "Init the project"
-  },
-  {
-    "text": "Serve",
-    "command": "terminals.runTerminalByName",
-    "arguments": ["serve"],
-    "tooltip": "Serve the project"
-  }
-  ```
-
-</details>
+```js
+{
+  "text": "$(terminal)",
+  "command": "terminals.runTerminal",
+  "tooltip": "Run a terminal"
+},
+{
+  "text": "Init",
+  "command": "terminals.runTerminalByName",
+  "arguments": ["init"],
+  "tooltip": "Init the project"
+},
+{
+  "text": "Serve",
+  "command": "terminals.runTerminalByName",
+  "arguments": ["serve"],
+  "tooltip": "Serve the project"
+}
+```
 
 ![Terminals](resources/demo/terminals.png)
 
