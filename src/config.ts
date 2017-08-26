@@ -16,7 +16,7 @@ const Config = {
   getDefaults () {
 
     const defaults: any = {},
-          {rootPath} = vscode.workspace;
+          rootPath = Utils.folder.getRootPath ();
 
     if ( rootPath ) defaults.configPath = path.join ( rootPath, '.vscode', 'commands.json' );
 

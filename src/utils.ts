@@ -75,6 +75,20 @@ const Utils = {
 
   },
 
+  folder: {
+
+    getRootPath () {
+
+      const {workspaceFolders} = vscode.workspace;
+
+      if ( !workspaceFolders ) return;
+
+      return workspaceFolders[0].uri.path;
+
+    }
+
+  },
+
   command: {
 
     proxiesHashes: [], // Array of hashes (`${command}${arguments}`) of proxy commands
