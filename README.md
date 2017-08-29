@@ -35,21 +35,21 @@ Commands: Refresh // Force a refresh, must be called after editing the local con
 
 Run the `Commands: Edit Configuration` command to create the local configuration file. If you want to define global commands simply add them to your Visual Studio Code settings under the key `commands.commands`.
 
-The configuration is an object that looks like this, most options are optional:
+The configuration is an object that looks like this:
 
 ```js
 {
   "commands": [ // Array of commands
     { // An object describing a command, most entries are optional
       "alignment": "left", // Should the item be placed to the left or right?
-      "priority": 0, // The priority of this item. Higher value means the item should be shown more to the left.
-      "color": "#FFCC00", // The foreground color for this item.
+      "priority": 0, // The priority of this item. Higher value means the item should be shown more to the left
+      "color": "#FFCC00", // The foreground color for this item
       "text": "$(gear) Settings", // The text to show for the entry
-      "tooltip": "Open User Settings", // The tooltip text when you hover over this item.
-      "command": "workbench.action.openGlobalSettings", // Command to execute.
-      "arguments": [1, 2, 3], // Arguments to pass to the command handler.
-      "filterLanguageRegex": "markdown", // Show only if current file's language matches this regex. Requires double escaping.
-      "filterFileRegex": ".*\\.ext", // Show only if the current file's path matches this regex. Requires double escaping.
+      "tooltip": "Open User Settings", // The tooltip text when you hover over this item
+      "command": "workbench.action.openGlobalSettings", // Command to execute
+      "arguments": [1, 2, 3], // Arguments to pass to the command handler
+      "filterLanguageRegex": "markdown", // Show only if current file's language matches this regex. Requires double escaping
+      "filterFileRegex": ".*\\.ext", // Show only if the current file's path matches this regex. Requires double escaping
     }
   ]
 }
@@ -59,7 +59,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ### Simple commands
 
-- Add buttons for opening the command palette, the global settings and toggling zen mode
+- Add buttons for opening the command palette, the global settings and toggling zen mode.
 
 ```js
 {
@@ -75,13 +75,13 @@ The configuration is an object that looks like this, most options are optional:
 {
   "text": "Zen",
   "command": "workbench.action.toggleZenMode",
-  "tooltip": "Toggle zen mode"
+  "tooltip": "Toggle Zen mode"
 }
 ```
 
 ![Basic](resources/demo/basic.png)
 
-- Add some file-related buttons: create a new untitled file and save all files
+- Add some file-related buttons: create a new untitled file and save all files.
 
 ```js
 {
@@ -98,7 +98,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ![File-Related](resources/demo/file_related.png)
 
-- Add a button for showing the Markdown preview to the side, only when a Markdown file is currently active
+- Add a button for showing the Markdown preview to the side, only when a Markdown file is currently active.
 
 ```js
 {
@@ -113,7 +113,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ### Implementing existing extensions' functionality
 
-- [Terminal Tabs](https://marketplace.visualstudio.com/items?itemName=Tyriar.terminal-tabs): Add buttons for easy switching to the N-th terminal instance
+- [Terminal Tabs](https://marketplace.visualstudio.com/items?itemName=Tyriar.terminal-tabs): Add buttons for easy switching to the N-th terminal instance.
 
 ```js
 {
@@ -135,7 +135,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ![Terminal Tabs](resources/demo/terminal_tabs.png)
 
-- [Activitus Bar](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.activitusbar): Replace the activity bar with buttons in the statusbar
+- [Activitus Bar](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.activitusbar): Replace the activity bar with buttons in the statusbar.
 
 ```js
 {
@@ -167,7 +167,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ![Activitus Bar](resources/demo/activitus_bar.png)
 
-- [StatusBar Debugger](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-statusbar-debugger): Replace the floating debugger widget with some statusbar buttoextension is actually a bit more powerful than this, but if you don't need all it's functionalities the following configuration might be good enough.</summary>
+- [StatusBar Debugger](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-statusbar-debugger): Replace the default floating debugger with some statusbar buttons. That extension is actually a bit more powerful than this, but if you don't need all it's functionalities the following configuration might be good enough.
 
 ```js
 {
@@ -186,7 +186,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ### Plays well with others
 
-[Projects+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus): Add some buttons for quickly switch between projects
+[Projects+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus): Add some buttons for quickly switching between projects.
 
 ```js
 {
@@ -216,7 +216,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ![Projects+](resources/demo/projects_plus.png)
 
-[Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus): Add a button for opening the todo file, and if that is opened add a button for viewintodos across your projects, using [Projects+ Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus-todo-plus)</summary>
+[Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus): Add a button for opening the todo file, and if that is opened add a button for viewing all todos across your projects, using [Projects+ Todo+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-projects-plus-todo-plus).
 
 ```js
 {
@@ -234,7 +234,7 @@ The configuration is an object that looks like this, most options are optional:
 
 ![Todo+](resources/demo/todo_plus.png)
 
-[Terminals](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals): Trigger custom advanced terminal commands
+[Terminals](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals): Trigger custom advanced terminal commands.
 
 ```js
 {
@@ -261,7 +261,7 @@ The configuration is an object that looks like this, most options are optional:
 ## Hits:
 
 - **Icons**: [here](https://octicons.github.com/) you can browse a list of supported icons. If for instance you click the first icon, you'll get a page with `.octicon-alert` written in it, to get the string to use simply remove the `.octicon-` part, so in this case the icon name would be `alert`.
-- **Live Refresh**: Even if you're crafting some local commands, it's advisable to start by adding them globally, since every time you edit your global settings your commands will be automatically refresh. Once you're done just move them to the local configuration file.
+- **Live Refresh**: Even if you're crafting some local commands, it's advisable to start by adding them globally because every time you edit your global settings your commands will be automatically refreshed. Once you're done just move them to the local configuration file.
 
 ## License
 

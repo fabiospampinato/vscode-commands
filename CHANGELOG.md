@@ -1,3 +1,6 @@
+### Version 1.1.2
+- Updated readme
+
 ### Version 1.1.1
 - Using JSON5 in order to be more human-friendly
 - Improved read of improperly formatted configurations
