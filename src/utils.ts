@@ -83,7 +83,7 @@ const Utils = {
 
       if ( !workspaceFolders ) return;
 
-      return workspaceFolders[0].uri.path;
+      return workspaceFolders[0].uri.fsPath;
 
     }
 
