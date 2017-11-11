@@ -15,7 +15,7 @@ const Providers = {
 
     const config = await Config.get (),
           {activeTextEditor} = vscode.window,
-          filePath = activeTextEditor && activeTextEditor.document.fileName,
+          filePath = activeTextEditor && activeTextEditor.document.uri.fsPath,
           language = activeTextEditor && activeTextEditor.document.languageId;
 
     Providers.providers.forEach ( provider => provider[method]( config, filePath, language ) );
