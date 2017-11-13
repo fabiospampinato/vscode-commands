@@ -6,3 +6,5 @@
   ☐ Toggle commands
   ☐ Cycle commands
 ☐ `when` support //TODO: Link related issue
+☐ Add a `keybinding` option
+  ☐ And an `hidden` option (so that we can basically run complex commands with just a keybinding)
