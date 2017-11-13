@@ -13,7 +13,7 @@ const Providers = {
 
   async call ( method: string ) {
 
-    const config = await Config.get (),
+    const config = await Config.getAll (),
           {activeTextEditor} = vscode.window,
           filePath = activeTextEditor && activeTextEditor.document.uri.fsPath,
           language = activeTextEditor && activeTextEditor.document.languageId;

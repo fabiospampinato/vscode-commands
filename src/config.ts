@@ -14,12 +14,18 @@ import Utils from './utils';
 
 const Config = {
 
+  getConfigPath ( rootPath ) {
+
+    return path.join ( rootPath, '.vscode', 'commands.json' );
+
+  },
+
   getDefaults () {
 
     const defaults: any = {},
-          rootPath = Utils.folder.getRootPath ();
+          rootPath = Utils.folder.getActiveRootPath ();
 
-    if ( rootPath ) defaults.configPath = path.join ( rootPath, '.vscode', 'commands.json' );
+    if ( rootPath ) defaults.configPath = Config.getConfigPath ( rootPath );
 
     return defaults;
 
@@ -79,6 +85,18 @@ const Config = {
           config = configPath && await Config.getFile ( configPath );
 
     return confMerge ( {}, defaults, extension, config ) as any;
+
+  },
+
+  async getAll () {
+
+    const defaults = Config.getDefaults (),
+          extension: any = Config.getExtension (),
+          rootPaths = Utils.folder.getAllRootPaths (),
+          configPaths = rootPaths.map ( rootPath => Config.getConfigPath ( rootPath ) ),
+          configs = await Promise.all ( configPaths.map ( configPath => Config.getFile ( configPath ) ) );
+
+    return confMerge ( {}, defaults, extension, ...configs ) as any;
 
   },
 
