@@ -1,3 +1,6 @@
+### Version 1.2.0
+- Added multi-root support
+
 ### Version 1.1.4
 - Properly getting the path of the currently active document
 
