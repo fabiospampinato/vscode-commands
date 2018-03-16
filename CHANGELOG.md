@@ -1,3 +1,6 @@
+### Version 1.2.2
+- Updated readme
+
 ### Version 1.2.1
 - Added a few todos
 - Fixed a typo
