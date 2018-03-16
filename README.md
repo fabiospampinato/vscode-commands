@@ -1,4 +1,4 @@
-# VSC Commands
+# Commands
 
 <p align="center">
 	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-commands/master/resources/logo-128x128.png" alt="Logo">
@@ -16,10 +16,10 @@ It comes packed with a lot of features:
 
 ## Install
 
-Run the following in the command palette:
+Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-commands), or run the following in the command palette:
 
 ```shell
-ext install vscode-commands
+ext install fabiospampinato.vscode-commands
 ```
 
 ## Usage
