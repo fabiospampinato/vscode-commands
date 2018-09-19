@@ -258,7 +258,7 @@ The configuration is an object that looks like this:
 
 ![Terminals](resources/demo/terminals.png)
 
-## Hints:
+## Hints
 
 - **Icons**: [here](https://octicons.github.com/) you can browse a list of supported icons. If for instance you click the first icon, you'll get a page with `.octicon-alert` written in it, to get the string to use simply remove the `.octicon-` part, so in this case the icon name would be `alert`.
 - **Live Refresh**: Even if you're crafting some local commands, it's advisable to start by adding them globally because every time you edit your global settings your commands will be automatically refreshed. Once you're done just move them to the local configuration file.
