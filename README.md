@@ -1,7 +1,7 @@
 # Commands
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-commands/master/resources/logo-128x128.png" alt="Logo">
+	<img src="https://raw.githubusercontent.com/fabiospampinato/vscode-commands/master/resources/logo.png" width="128" alt="Logo">
 </p>
 
 Trigger arbitrary commands from the statusbar. Supports passing arguments!
