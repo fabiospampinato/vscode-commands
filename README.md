@@ -13,6 +13,7 @@ It comes packed with a lot of features:
   - **Configurable**: Many aspects of the statusbar items can be configured, including text, tooltip, color, position etc.
   - **Per language commands**: Show a particular statusbar item only if the currently opened file's language matches a provided regex.
   - **Per file commands**: Show a particular statusbar item only if the currently opened file's path matches a provided regex.
+  - **Per workspace file**: Show a particular statusbar item only if a workspace file path matches a provided regex.
 
 ## Install
 
@@ -50,6 +51,7 @@ The configuration is an object that looks like this:
       "arguments": [1, 2, 3], // Arguments to pass to the command handler
       "filterLanguageRegex": "markdown", // Show only if current file's language matches this regex. Requires double escaping
       "filterFileRegex": ".*\\.ext", // Show only if the current file's path matches this regex. Requires double escaping
+      "filterWorskspaceFileRegex": ".*\\.ext", // Show only if a workspace file path matches this regex. Requires double escaping
     }
   ]
 }

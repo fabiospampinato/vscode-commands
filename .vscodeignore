@@ -9,3 +9,8 @@ src/**
 test/**
 tsconfig.json
 webpack.config.js
+.todo
+.editorconfig
+node_modules
+yarn.lock
+.history

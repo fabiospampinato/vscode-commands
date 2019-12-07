@@ -120,10 +120,18 @@ const Utils = {
 
     proxiesHashes: [], // Array of hashes (`${command}${arguments}`) of proxy commands
 
-    isFiltered ( command, filePath, language ) {
+    async isFiltered ( command, filePath, language ) {
+
+        let wsSearch = []
+
+        if (command.filterWorskspaceFileRegex) {
+            let ws = vscode.workspace
+            wsSearch = await ws.findFiles(new vscode.RelativePattern(ws.rootPath, command.filterWorskspaceFileRegex))
+        }
 
       return !!( command.filterFileRegex && ( !filePath || !filePath.match ( new RegExp ( command.filterFileRegex, 'i' ) ) ) ) ||
-             !!( command.filterLanguageRegex && ( !language || !language.match ( new RegExp ( command.filterLanguageRegex, 'i' ) ) ) );
+             !!( command.filterLanguageRegex && ( !language || !language.match ( new RegExp ( command.filterLanguageRegex, 'i' ) ) ) ) ||
+             !!( command.filterWorskspaceFileRegex && !wsSearch.length );
 
     },
 

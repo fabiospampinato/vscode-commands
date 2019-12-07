@@ -53,7 +53,7 @@
     "url": "https://github.com/fabiospampinato/vscode-commands.git"
   },
   "engines": {
-    "vscode": "^1.15.0"
+    "vscode": "^1.21.0"
   },
   "keywords": [
     "vscode",

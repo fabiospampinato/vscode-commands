@@ -10,36 +10,36 @@ const Statusbar = {
 
   items: [],
 
-  refresh ( config, filePath, language ) {
+  async refresh ( config, filePath, language ) {
 
     Statusbar.items.forEach ( item => item.dispose () );
 
     Statusbar.items = [];
 
-    config.commands.forEach ( command => {
+    for (const command of config.commands) {
 
       const item = new Item ( command );
 
       Statusbar.items.push ( item );
 
-      const isHidden = ( Utils.command.isFiltered ( command, filePath, language ) );
+      const isHidden = await ( Utils.command.isFiltered ( command, filePath, language ) );
 
       if ( !isHidden ) item.show ();
 
-    });
+    };
 
   },
 
-  refreshTextEditor ( config, filePath, language ) {
+  async refreshTextEditor ( config, filePath, language ) {
 
-    Statusbar.items.forEach ( item => {
+    for (const item of Statusbar.items) {
 
       const command = item.config,
-            isHidden = ( Utils.command.isFiltered ( command, filePath, language ) );
+            isHidden = await ( Utils.command.isFiltered ( command, filePath, language ) );
 
       item[isHidden ? 'hide' : 'show']();
 
-    });
+    };
 
   }
 
