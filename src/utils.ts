@@ -126,7 +126,10 @@ const Utils = {
 
         if (command.filterWorskspaceFileRegex) {
             let ws = vscode.workspace
-            wsSearch = await ws.findFiles(new vscode.RelativePattern(ws.rootPath, command.filterWorskspaceFileRegex))
+
+            if(ws){
+              wsSearch = await ws.findFiles(new vscode.RelativePattern(ws.rootPath, command.filterWorskspaceFileRegex))
+            }
         }
 
       return !!( command.filterFileRegex && ( !filePath || !filePath.match ( new RegExp ( command.filterFileRegex, 'i' ) ) ) ) ||
