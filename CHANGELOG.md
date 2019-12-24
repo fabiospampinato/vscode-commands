@@ -1,3 +1,8 @@
+### Version 1.3.0
+- Moved "@types/*" to "dependencies"
+- Replaced tabs with spaces
+- Added a “filterWorskspaceFileRegex” option
+
 ### Version 1.2.5
 - Readme: using hi-res logo
 
