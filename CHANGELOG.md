@@ -1,3 +1,6 @@
+### Version 1.3.0
+- Added a “filterWorskspaceFileRegex” option
+
 ### Version 1.2.5
 - Readme: using hi-res logo
 
