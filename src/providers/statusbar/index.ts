@@ -16,13 +16,13 @@ const Statusbar = {
 
     Statusbar.items = [];
 
-    config.commands.forEach ( command => {
+    config.commands.forEach ( async command => {
 
       const item = new Item ( command );
 
       Statusbar.items.push ( item );
 
-      const isHidden = ( Utils.command.isFiltered ( command, filePath, language ) );
+      const isHidden = await Utils.command.isFiltered ( command, filePath, language );
 
       if ( !isHidden ) item.show ();
 
@@ -32,10 +32,10 @@ const Statusbar = {
 
   refreshTextEditor ( config, filePath, language ) {
 
-    Statusbar.items.forEach ( item => {
+    Statusbar.items.forEach ( async item => {
 
       const command = item.config,
-            isHidden = ( Utils.command.isFiltered ( command, filePath, language ) );
+            isHidden = await Utils.command.isFiltered ( command, filePath, language );
 
       item[isHidden ? 'hide' : 'show']();
 
