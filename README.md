@@ -262,7 +262,7 @@ The configuration is an object that looks like this:
 
 ## Hints
 
-- **Icons**: [here](https://octicons.github.com/) you can browse a list of supported icons. If for instance you click the first icon, you'll get a page with `.octicon-alert` written in it, to get the string to use simply remove the `.octicon-` part, so in this case the icon name would be `alert`.
+- **Icons**: [here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing) you can browse a list of supported icons. Insert them into your config file using the notation `$(ICON-NAME)`. 
 - **Live Refresh**: Even if you're crafting some local commands, it's advisable to start by adding them globally because every time you edit your global settings your commands will be automatically refreshed. Once you're done just move them to the local configuration file.
 
 ## Contributing
