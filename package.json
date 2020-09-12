@@ -7,6 +7,7 @@
   "license": "MIT",
   "main": "out/extension.js",
   "publisher": "fabiospampinato",
+  "extensionKind": ["ui", "workspace"],
   "activationEvents": [
     "*"
   ],
