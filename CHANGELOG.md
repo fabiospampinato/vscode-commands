@@ -1,3 +1,7 @@
+### Version 1.3.1
+- Update .github/FUNDING.yml
+- Ensuring it works when using remote connections
+
 ### Version 1.3.0
 - Added a “filterWorskspaceFileRegex” option
 
