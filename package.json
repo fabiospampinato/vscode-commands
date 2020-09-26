@@ -32,6 +32,20 @@
         "command": "commands.refresh",
         "title": "Commands: Refresh"
       }
+    ],
+    "languages": [
+      {
+        "id": "jsonc",
+        "extensions": [
+          "commands.json"
+        ]
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "commands.json",
+        "url": "./commands.schema.json"
+      }
     ]
   },
   "scripts": {
