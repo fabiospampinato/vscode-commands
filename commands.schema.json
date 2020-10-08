@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "properties": {
+    "commands": {
+      "description": "Array of commands",
+      "type": "array",
+      "items": {
+        "required": ["text", "command"],
+        "type": "object",
+        "defaultSnippets": [
+          {
+            "body": {
+              "command": "workbench.action.files.newUntitledFile",
+              "text": "$(file-code) New file",
+              "tooltip": "New file"
+            }
+          }
+        ],
+        "properties": {
+          "alignment": {
+            "description": "Should the item be placed to the left or right?",
+            "enum": ["left", "right"],
+            "type": "string"
+          },
+          "arguments": {
+            "description": "Arguments to pass to the command handler",
+            "type": "array"
+          },
+          "color": {
+            "default": "#FFCC00",
+            "description": "The foreground color for this item",
+            "format": "color-hex"
+          },
+          "command": {
+            "description": "Command to execute",
+            "type": "string"
+          },
+          "filterFileRegex": {
+            "description": "Show only if the current file's path matches this regex.\nRequires double escaping\n\nExample: \".*\\.ext\"",
+            "type": "string"
+          },
+          "filterLanguageRegex": {
+            "description": "Show only if current file's language matches this regex.\nRequires double escaping\n\nExample: \"markdown\"",
+            "type": "string"
+          },
+          "filterWorskspaceFileRegex": {
+            "description": "Show only if a file's path that matches this regex is found in the workspace.\nRequires double escaping\n\nExample: \"**/.*\\.ext\"",
+            "type": "string"
+          },
+          "priority": {
+            "default": 0,
+            "description": "The priority of this item. Higher value means the item should be shown more to the left",
+            "type": "number"
+          },
+          "text": {
+            "description": "The text to show for the entry",
+            "type": "string"
+          },
+          "tooltip": {
+            "description": "The tooltip text when you hover over this item",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": ["commands"],
+  "title": "Commands",
+  "type": "object",
+  "version": 1.0
+}
