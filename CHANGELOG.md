@@ -1,3 +1,6 @@
+### Version 1.4.0
+- Added schema validation for settings
+
 ### Version 1.3.1
 - Update .github/FUNDING.yml
 - Ensuring it works when using remote connections
