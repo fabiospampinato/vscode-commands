@@ -1,3 +1,6 @@
+### Version 1.4.1
+- Ensuring no settings objects are mutated, not triggering any errors
+
 ### Version 1.4.0
 - Added schema validation for settings
 
