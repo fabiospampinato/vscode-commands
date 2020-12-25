@@ -33,11 +33,7 @@ const Config = {
 
   getExtension ( extension = 'commands' ) {
 
-    const config = vscode.workspace.getConfiguration ().get ( extension );
-
-    if ( !config['configPath'] ) delete config['configPath'];
-
-    return config;
+    return vscode.workspace.getConfiguration ().get ( extension ) as any;
 
   },
 
