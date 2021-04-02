@@ -51,7 +51,7 @@ The configuration is an object that looks like this:
       "arguments": [1, 2, 3], // Arguments to pass to the command handler
       "filterLanguageRegex": "markdown", // Show only if current file's language matches this regex. Requires double escaping
       "filterFileRegex": ".*\\.ext", // Show only if the current file's path matches this regex. Requires double escaping
-      "filterWorskspaceFileRegex": "**/.*\\.ext" // Show only if a file's path that matches this regex is found in the workspace. Requires double escaping
+      "filterWorkspaceFileRegex": "**/.*\\.ext" // Show only if a file's path that matches this regex is found in the workspace. Requires double escaping
     }
   ]
 }

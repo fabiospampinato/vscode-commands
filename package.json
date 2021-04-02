@@ -57,7 +57,7 @@
                 "description": "Show only if current file's language matches this regex.\nRequires double escaping\n\nExample: \"markdown\"",
                 "type": "string"
               },
-              "filterWorskspaceFileRegex": {
+              "filterWorkspaceFileRegex": {
                 "description": "Show only if a file's path that matches this regex is found in the workspace.\nRequires double escaping\n\nExample: \"**/.*\\.ext\"",
                 "type": "string"
               },

@@ -124,7 +124,7 @@ const Utils = {
 
       return !!( command.filterFileRegex && ( !filePath || !filePath.match ( new RegExp ( command.filterFileRegex, 'i' ) ) ) ) ||
              !!( command.filterLanguageRegex && ( !language || !language.match ( new RegExp ( command.filterLanguageRegex, 'i' ) ) ) ) ||
-             !!( command.filterWorskspaceFileRegex && !( await vscode.workspace.findFiles ( command.filterWorskspaceFileRegex, null, 1 ) ).length );
+             !!( command.filterWorkspaceFileRegex && !( await vscode.workspace.findFiles ( command.filterWorkspaceFileRegex, null, 1 ) ).length );
 
     },
 
