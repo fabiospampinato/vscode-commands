@@ -1,3 +1,8 @@
+### Version 1.4.2
+- Deleted repo-level github funding.yml
+- Renamed "filterWorskspaceFileRegex" to "filterWorkspaceFileRegex"
+- Added a fixme comment
+
 ### Version 1.4.1
 - Ensuring no settings objects are mutated, not triggering any errors
 
