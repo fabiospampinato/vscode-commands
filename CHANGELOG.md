@@ -1,3 +1,6 @@
+### Version 1.4.3
+- Added a dialog announcing the fundraising
+
 ### Version 1.4.2
 - Deleted repo-level github funding.yml
 - Renamed "filterWorskspaceFileRegex" to "filterWorkspaceFileRegex"
