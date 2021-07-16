@@ -7,7 +7,10 @@
   "license": "MIT",
   "main": "out/extension.js",
   "publisher": "fabiospampinato",
-  "extensionKind": ["ui", "workspace"],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
   "activationEvents": [
     "*"
   ],
@@ -33,7 +36,10 @@
             "properties": {
               "alignment": {
                 "description": "Should the item be placed to the left or right?",
-                "enum": ["left", "right"],
+                "enum": [
+                  "left",
+                  "right"
+                ],
                 "type": "string"
               },
               "arguments": {
@@ -75,7 +81,10 @@
                 "type": "string"
               }
             },
-            "required": ["text", "command"],
+            "required": [
+              "text",
+              "command"
+            ],
             "type": "object"
           }
         }
@@ -145,7 +154,8 @@
     "json5": "^0.5.1",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
-    "pify": "^3.0.0"
+    "pify": "^3.0.0",
+    "vscode-beggar": "^1.0.0"
   },
   "devDependencies": {
     "ts-loader": "^5.2.1",
