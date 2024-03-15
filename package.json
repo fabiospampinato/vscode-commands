@@ -5,7 +5,7 @@
   "repository": "github:fabiospampinato/vscode-commands",
   "description": "Trigger arbitrary commands from the statusbar. Supports passing arguments!",
   "icon": "resources/logo-128x128.png",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "extensionKind": [
     "ui",

@@ -1,3 +1,8 @@
+### Version 2.0.0
+- Rewitten: more modern code, no third-party dependencies, 98% smaller bundle
+- Removed donation popup, thank you for your support!
+- Assuming "commands.json" files to be written in JSONC, rather than JSON5
+
 ### Version 1.4.3
 - Added a dialog announcing the fundraising
 
