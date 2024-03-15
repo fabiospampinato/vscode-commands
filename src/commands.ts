@@ -1,50 +1,57 @@
 
 /* IMPORT */
 
-import * as vscode from 'vscode';
-import Config from './config';
+import fs from 'node:fs';
+import path from 'node:path';
+import {alert, getProjectRootPath, openInEditor, prompt} from 'vscode-extras';
+import {DEFAULT_OPTIONS} from './constants';
 import Providers from './providers';
-import Utils from './utils';
 
-/* COMMANDS */
+/* MAIN */
 
-async function initConfig () {
+const initConfig = async (): Promise<void> => {
 
-  const config = await Config.get ();
-  const defaultConfig = {
-    commands: [{
-      command: 'commands.refresh',
-      text: '$(sync)',
-      tooltip: 'Refresh commands',
-      color: '#FFCC00'
-    }]
-  };
-  const content = JSON.stringify ( defaultConfig, undefined, 2 );
+  const rootPath = getProjectRootPath ();
 
-  return Utils.file.make ( config.configPath, content );
+  if ( !rootPath ) return alert.error ( 'You have to open a project before being able to init its configuration' );
 
-}
+  const configContent = JSON.stringify ( DEFAULT_OPTIONS, undefined, 2 ); //TODO: Read the default indentation from somewhere
+  const configFolderPath = path.join ( rootPath, '.vscode' );
+  const configFilePath = path.join ( configFolderPath, 'commands.json' );
 
-async function editConfig () {
+  if ( fs.existsSync ( configFilePath ) ) return;
 
-  const rootPath = Utils.folder.getActiveRootPath ();
+  await fs.promises.mkdir ( configFolderPath, { recursive: true } );
+  await fs.promises.writeFile ( configFilePath, configContent );
 
-  if ( !rootPath ) return vscode.window.showErrorMessage ( 'You have to open a project before being able to edit its configuration' );
+  await editConfig ();
 
-  const config = await Config.get (),
-        hasFile = !!( await Utils.file.read ( config.configPath ) );
+};
 
-  if ( !hasFile ) await initConfig ();
+const editConfig = async (): Promise<void> => {
 
-  return Utils.file.open ( config.configPath );
+  const rootPath = getProjectRootPath ();
 
-}
+  if ( !rootPath ) return alert.error ( 'You have to open a project before being able to edit its configuration' );
 
-async function refresh () {
+  const configFolderPath = path.join ( rootPath, '.vscode' );
+  const configFilePath = path.join ( configFolderPath, 'commands.json' );
 
-  return Providers.refresh ();
+  const isFile = fs.existsSync ( configFilePath );
 
-}
+  if ( !isFile && !await prompt.boolean ( 'Configuration file not found, do you want to create it?' ) ) return;
+
+  if ( !isFile ) await initConfig ();
+
+  openInEditor ( configFilePath );
+
+};
+
+const refresh = async (): Promise<void> => {
+
+  return Providers.onChangeAll ();
+
+};
 
 /* EXPORT */
 

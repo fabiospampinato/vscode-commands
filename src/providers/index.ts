@@ -1,36 +1,23 @@
 
 /* IMPORT */
 
-import * as vscode from 'vscode';
 import Statusbar from './statusbar';
-import Config from '../config';
 
-/* PROVIDERS */
+/* MAIN */
 
 const Providers = {
 
-  providers: [Statusbar],
+  /* PROVIDER API */
 
-  async call ( method: string ) {
+  onChangeAll: (): void => {
 
-    const config = await Config.getAll (),
-          {activeTextEditor} = vscode.window,
-          filePath = activeTextEditor && activeTextEditor.document.uri.fsPath,
-          language = activeTextEditor && activeTextEditor.document.languageId;
-
-    Providers.providers.forEach ( provider => provider[method]( config, filePath, language ) );
+    Statusbar.onChangeAll ();
 
   },
 
-  async refresh () {
+  onChangeEditor: (): void => {
 
-    return Providers.call ( 'refresh' );
-
-  },
-
-  async refreshTextEditor () {
-
-    return Providers.call ( 'refreshTextEditor' );
+    Statusbar.onChangeEditor ();
 
   }
 

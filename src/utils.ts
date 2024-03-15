@@ -1,156 +1,169 @@
 
 /* IMPORT */
 
-import * as _ from 'lodash';
-import * as absolute from 'absolute';
-import * as fs from 'fs';
-import * as mkdirp from 'mkdirp';
-import * as path from 'path';
-import * as pify from 'pify';
-import * as vscode from 'vscode';
-import * as Commands from './commands';
+import fs from 'node:fs';
+import path from 'node:path';
+import JSONC from 'tiny-jsonc';
+import vscode from 'vscode';
+import {getConfig, getProjectRootPaths} from 'vscode-extras';
+import type {Command} from './types';
 
-/* UTILS */
+/* MAIN */
 
-const Utils = {
+const attempt = <T> ( fn: () => T ): T | undefined => {
 
-  initCommands ( context: vscode.ExtensionContext ) {
+  try {
 
-    const {commands} = vscode.extensions.getExtension ( 'fabiospampinato.vscode-commands' ).packageJSON.contributes;
+    return fn ();
 
-    commands.forEach ( ({ command, title }) => {
+  } catch {
 
-      const commandName = _.last ( command.split ( '.' ) ) as string,
-            handler = Commands[commandName],
-            disposable = vscode.commands.registerCommand ( command, () => handler () );
-
-      context.subscriptions.push ( disposable );
-
-    });
-
-    return Commands;
-
-  },
-
-  file: {
-
-    open ( filepath ) {
-
-      return vscode.commands.executeCommand ( 'vscode.open', vscode.Uri.parse ( `file://${filepath}` ) );
-
-    },
-
-    async make ( filepath, content ) {
-
-      await pify ( mkdirp )( path.dirname ( filepath ) );
-
-      return Utils.file.write ( filepath, content );
-
-    },
-
-    async read ( filepath ) {
-
-      try {
-        return ( await pify ( fs.readFile )( filepath, { encoding: 'utf8' } ) ).toString ();
-      } catch ( e ) {
-        return;
-      }
-
-    },
-
-    readSync ( filepath ) {
-
-      try {
-        return ( fs.readFileSync ( filepath, { encoding: 'utf8' } ) ).toString ();
-      } catch ( e ) {
-        return;
-      }
-
-    },
-
-    async write ( filepath, content ) {
-
-      return pify ( fs.writeFile )( filepath, content, {} );
-
-    }
-
-  },
-
-  folder: {
-
-    getAllRootPaths () {
-
-      const {workspaceFolders} = vscode.workspace;
-
-      if ( !workspaceFolders ) return [];
-
-      return workspaceFolders.map ( folder => folder.uri.fsPath );
-
-    },
-
-    getRootPath ( basePath? ) {
-
-      const {workspaceFolders} = vscode.workspace;
-
-      if ( !workspaceFolders ) return;
-
-      const firstRootPath = workspaceFolders[0].uri.fsPath;
-
-      if ( !basePath || !absolute ( basePath ) ) return firstRootPath;
-
-      const rootPaths = workspaceFolders.map ( folder => folder.uri.fsPath ),
-            sortedRootPaths = _.sortBy ( rootPaths, [path => path.length] ).reverse (); // In order to get the closest root
-
-      return sortedRootPaths.find ( rootPath => basePath.startsWith ( rootPath ) );
-
-    },
-
-    getActiveRootPath () {
-
-      const {activeTextEditor} = vscode.window,
-            editorPath = activeTextEditor && activeTextEditor.document.uri.fsPath;
-
-      return Utils.folder.getRootPath ( editorPath );
-
-    }
-
-  },
-
-  command: {
-
-    proxiesHashes: [], // Array of hashes (`${command}${arguments}`) of proxy commands
-
-    async isFiltered ( command, filePath, language ) {
-
-      return !!( command.filterFileRegex && ( !filePath || !filePath.match ( new RegExp ( command.filterFileRegex, 'i' ) ) ) ) ||
-             !!( command.filterLanguageRegex && ( !language || !language.match ( new RegExp ( command.filterLanguageRegex, 'i' ) ) ) ) ||
-             !!( command.filterWorkspaceFileRegex && !( await vscode.workspace.findFiles ( command.filterWorkspaceFileRegex, null, 1 ) ).length ); //FIXME: This is actually broken, it's a glob not a regex
-
-    },
-
-    get ( command, args ) {
-
-      if ( !args ) return command;
-
-      const hash = `${command}${JSON.stringify ( args )}`,
-            exists = !!Utils.command.proxiesHashes.find ( h => h === hash );
-
-      if ( exists ) return hash;
-
-      vscode.commands.registerCommand ( hash, () => {
-        vscode.commands.executeCommand ( command, ...args );
-      });
-
-      Utils.command.proxiesHashes.push ( hash );
-
-      return hash;
-
-    }
+    return;
 
   }
 
 };
 
+const getCommandIdentifier = (() => {
+
+  const cached = new Set<string> ();
+
+  return ( command: string, args?: unknown[] ): string => {
+
+    if ( !args?.length ) return command;
+
+    const id = `commands.${command}${JSON.stringify ( args )}`;
+
+    if ( cached.has ( id ) ) return id;
+
+    vscode.commands.registerCommand ( id, () => {
+      vscode.commands.executeCommand ( command, ...args );
+    });
+
+    cached.add ( id );
+
+    return id;
+
+  };
+
+})();
+
+const getCommandVisibility = async ( command: Command, filePath?: string, language?: string ): Promise<boolean> => {
+
+debugger;
+
+  const {filterFileRegex, filterLanguageRegex, filterWorkspaceFileRegex} = command;
+
+  if ( filterFileRegex && !filePath?.match ( new RegExp ( filterFileRegex, 'i' ) ) ) return false;
+
+  if ( filterLanguageRegex && !language?.match ( new RegExp ( filterLanguageRegex, 'i' ) ) ) return false;
+
+  if ( filterWorkspaceFileRegex && !( await vscode.workspace.findFiles ( filterWorkspaceFileRegex, null, 1 ) ).length ) return false; //FIXME: This is actually broken, it's a glob not a regex
+
+  return true;
+
+};
+
+const getCommands = (): Command[] => {
+
+  const internal = getCommandsFromInternalConfig ();
+  const external = getCommandsFromExternalConfigs ();
+  const commands = [...internal, ...external];
+
+  return commands;
+
+};
+
+const getCommandsFromUnknown = ( options: unknown ): Command[] => { // This normalizes a potential "commands" array contained in a potential "options" object
+
+  //TODO: Make actual regexes
+
+  const commands: Command[] = [];
+
+  if ( isObject ( options ) && isArray ( options.commands ) ) {
+
+    for ( const command of options.commands ) {
+
+      if ( !isObject ( command ) ) continue;
+
+      const cmd = isString ( command?.command ) ? command.command : undefined;
+      const args = isArray ( command?.arguments ) ? command.arguments : undefined;
+
+      if ( !isString ( cmd ) ) continue;
+
+      const alignment = isString ( command?.alignment ) ? command.alignment : undefined;
+      const color = isString ( command?.color ) ? command.color : undefined;
+      const priority = isNumber ( command?.priority ) ? command.priority : undefined;
+      const text = isString ( command?.text ) ? command.text : undefined;
+      const tooltip = isString ( command?.tooltip ) ? command.tooltip : undefined;
+
+      const filterFileRegex = isString ( command?.filterFileRegex ) ? command.filterFileRegex : undefined;
+      const filterLanguageRegex = isString ( command?.filterLanguageRegex ) ? command.filterLanguageRegex : undefined;
+      const filterWorkspaceFileRegex = isString ( command?.filterWorkspaceFileRegex ) ? command.filterWorkspaceFileRegex : undefined;
+
+      commands.push ({ command: cmd, arguments: args, alignment, color, priority, text, tooltip, filterFileRegex, filterLanguageRegex, filterWorkspaceFileRegex });
+
+    }
+
+  }
+
+  return commands;
+
+};
+
+const getCommandsFromInternalConfig = (): Command[] => {
+
+  const config = getConfig ( 'commands' );
+  const commands = getCommandsFromUnknown ( config );
+
+  return commands;
+
+};
+
+const getCommandsFromExternalConfig = ( rootPath: string ): Command[] => {
+
+  const configPath = path.join ( rootPath, '.vscode', 'commands.json' );
+  const configContent = attempt ( () => fs.readFileSync ( configPath, 'utf8' ) );
+  const config = attempt ( () => configContent && JSONC.parse ( configContent ) );
+  const commands = getCommandsFromUnknown ( config );
+
+  return commands;
+
+};
+
+const getCommandsFromExternalConfigs = (): Command[] => {
+
+  const rootPaths = getProjectRootPaths ();
+  const commands = rootPaths.map ( getCommandsFromExternalConfig ).flat ();
+
+  return commands;
+
+};
+
+const isArray = ( value: unknown ): value is unknown[] => {
+
+  return Array.isArray ( value );
+
+};
+
+const isNumber = ( value: unknown ): value is number => {
+
+  return typeof value === 'number';
+
+};
+
+const isObject = ( value: unknown ): value is Record<string, unknown> => {
+
+  return typeof value === 'object' && value !== null;
+
+};
+
+const isString = ( value: unknown ): value is string => {
+
+  return typeof value === 'string';
+
+};
+
 /* EXPORT */
 
-export default Utils;
+export {attempt, getCommandIdentifier, getCommandVisibility, getCommands, isArray, isNumber, isObject, isString};

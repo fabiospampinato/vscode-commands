@@ -6,14 +6,15 @@
 
 Trigger arbitrary commands from the statusbar. Supports passing arguments!
 
-It comes packed with a lot of features:
-  - **Supports passing arguments**: No other extension of this kind supports passing arguments to commands. This feature makes it quite powerful, for instance adding the ability to trigger custom terminal commands via [Terminals](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals), more about it below.
-  - **Configuration based**: No need to create an extension just for adding some simple items to the statusbar, just edit the configuration.
-  - **Global and local commands**: Define commands in your settings to make them global, define them in a local configuration file to make them project-specific.
-  - **Configurable**: Many aspects of the statusbar items can be configured, including text, tooltip, color, position etc.
-  - **Per language commands**: Show a particular statusbar item only if the currently opened file's language matches a provided regex.
-  - **Per file commands**: Show a particular statusbar item only if the currently opened file's path matches a provided regex.
-  - **Per workspace file**: Show a particular statusbar item only if a file's path that matches a provided regex is found in the workspace.
+It comes packed with features:
+
+- **Supports passing arguments**: this feature makes it quite powerful, for instance adding the ability to trigger custom terminal commands via [Terminals](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-terminals), more about it below.
+- **Configuration based**: no need to create an extension just for adding some simple items to the statusbar, just edit the configuration.
+- **Global and local commands**: define commands in your settings to make them global, define them in a local configuration file to make them project-specific.
+- **Configurable**: many aspects of the statusbar items can be configured, including text, tooltip, color, position etc.
+- **Per language commands**: show a particular statusbar item only if the currently opened file's language matches a provided regex.
+- **Per file commands**: show a particular statusbar item only if the currently opened file's path matches a provided regex.
+- **Per workspace file**: show a particular statusbar item only if a file's path that matches a provided regex is found in the workspace.
 
 ## Install
 
@@ -28,8 +29,8 @@ ext install fabiospampinato.vscode-commands
 It adds 2 commands to the command palette:
 
 ```js
-Commands: Edit Configuration // Open the local configuration file
-Commands: Refresh // Force a refresh, must be called after editing the local configuration
+'Commands: Edit Configuration' // Open the local configuration file
+'Commands: Refresh' // Force a refresh, must be called after editing the local configuration
 ```
 
 ## Configuration
@@ -262,14 +263,8 @@ The configuration is an object that looks like this:
 
 ## Hints
 
-- **Icons**: [here](https://octicons.github.com/) you can browse a list of supported icons. If for instance you click the first icon, you'll get a page with `.octicon-alert` written in it, to get the string to use simply remove the `.octicon-` part, so in this case the icon name would be `alert`.
-- **Live Refresh**: Even if you're crafting some local commands, it's advisable to start by adding them globally because every time you edit your global settings your commands will be automatically refreshed. Once you're done just move them to the local configuration file.
-
-## Contributing
-
-If you found a problem, or have a feature request, please open an [issue](https://github.com/fabiospampinato/vscode-commands/issues) about it.
-
-If you want to make a pull request you can debug the extension using [Debug Launcher](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-debug-launcher).
+- **Icon**: [here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing) you can browse a list of supported icons.
+- **Live Refresh**: even if you're crafting some local commands, it's advisable to start by adding them globally because every time you edit your global settings your commands will be automatically refreshed. Once you're done just move them to the local configuration file.
 
 ## License
 
