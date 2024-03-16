@@ -50,8 +50,6 @@ const getCommandIdentifier = (() => {
 
 const getCommandVisibility = async ( command: Command, filePath?: string, language?: string ): Promise<boolean> => {
 
-debugger;
-
   const {filterFileRegex, filterLanguageRegex, filterWorkspaceFileRegex} = command;
 
   if ( filterFileRegex && !filePath?.match ( new RegExp ( filterFileRegex, 'i' ) ) ) return false;
