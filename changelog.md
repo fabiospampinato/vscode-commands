@@ -1,3 +1,6 @@
+### Version 2.0.2
+- Delaying activation until the editor has started up, for slightly faster startup
+
 ### Version 2.0.1
 - Deleted a leftover debugger statement
 
